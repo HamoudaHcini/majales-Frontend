@@ -1,0 +1,167 @@
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Ajouter une reunion</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form name="createForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createForm">
+      <div class="card-body">
+        <div style="display: none;" class="form-group">
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" placeholder="reunion">
+        </div>
+        <div class="form-group">
+          <label for="sujet">Sujet</label>
+          <textarea style="height: 160px;" type="text" class="form-control" id="sujet" name="sujet" formControlName="sujet" placeholder="sujet"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="type">Type</label>
+                    <input type="text" class="form-control" id="type" name="type" formControlName="type" placeholder="Type du reunion">
+                </div> 
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="lieu">Lieu</label>
+                    <input type="text" class="form-control" id="lieu" name="lieu" formControlName="lieu" placeholder="lieu du reunion">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="duree">Durée</label>
+                    <input type="text" class="form-control" id="duree" name="duree" formControlName="duree" placeholder="Durée du reunion">
+                </div>
+            </div>
+        </div>
+       
+      </div>
+
+
+      <div class="card" style="position: relative; left: 0px; top: 0px;">
+        <div class="card-header ui-sortable-handle" style="cursor: move;">
+          <h3 class="card-title">
+            <i class="ion ion-clipboard mr-1"></i>
+            Membres du reunion
+          </h3>
+
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <ul class="todo-list ui-sortable" data-widget="todo-list">
+            <li id="chosenMembers{{ chosenMember._id }}" *ngFor="let chosenMember of chosenMembers ;" >
+              <div class="icheck-primary d-inline ml-2">
+                <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                <label for="todoCheck1"></label>
+              </div>
+              <span class="text">{{ chosenMember.membre!.nom }} {{ chosenMember.membre!.prenom }}</span>
+              <div class="tools">
+                <i class="fas fa-trash"></i>
+              </div>
+            </li>
+            
+          </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer clearfix">
+          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#MembresModal">
+              <i class="fas fa-plus"></i> Ajouter des membres
+            </button>
+        </div>
+      </div>
+
+
+
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+      </div>
+    </form>
+  </div>
+
+
+
+  <div class="modal fade" id="MembresModal" tabindex="-1" role="dialog" aria-labelledby="MembresModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Ajouter des membres</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2 class="card-title">Listes des Membres</h2>
+                        </div>
+                    </div>
+                  
+                </div>
+                
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead>
+                    <tr>
+                        <th></th>  
+                      <th>CIN</th>
+                      <th>Nom et Prenom</th>
+                      <th>Adresse</th>
+                      <th>Portable</th>
+                      <th>Specialite</th>
+                      <th>Diplome</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="membre{{ membre._id }}" *ngFor="let membre of membres ;">
+                      <td style="text-align: center;">
+                        <div *ngIf="membre.isParticipated==true; else elseBlock">
+                          <button id="checkBtn" (click)="ChooseMember(membre)" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </div>
+                        <ng-template #elseBlock>
+                          <button id="checkBtn" (click)="ChooseMember(membre)" class="btn btn-primary">
+                            <i class="fa fa-check"></i>
+                          </button>
+                        </ng-template>
+                          
+                      </td>
+                      <td>{{ membre.CIN }}</td>
+                      <td>{{ membre.nom }} {{ membre.prenom }}</td>
+                      <td>{{ membre.adresse }}</td>
+                      <td>{{ membre.portable }}</td>
+                      <td>{{ membre.specialite }}</td>
+                      <td>{{ membre.diplome }}</td>
+
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button  type="button" class="btn btn-primary">Sauvegarder</button>
+          </div>
+        </div>
+      </div>
+  </div>

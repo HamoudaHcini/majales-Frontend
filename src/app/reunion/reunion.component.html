@@ -1,0 +1,137 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2 class="card-title">Listes des Reunions</h2>
+            </div>
+            <div style="text-align: right;" class="col-lg-6">
+                <a routerLink="/reunion/add" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Ajouter une reunion</a>
+            </div>
+        </div>
+      
+    </div>
+    
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="example1" class="table table-bordered table-striped dataTable dtr-inline">
+        <thead>
+        <tr>
+          <th>Sujet</th>
+          <th>Lieu</th>
+          <th>Date</th>
+          <th>Duree</th>
+          <th>Type</th>
+          <th>Date de creation</th>  
+          <th>Actions</th>  
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let reunion of reunions ;">
+          <td>{{ reunion.sujet }}</td>
+          <td>{{ reunion.lieu }}</td>
+          <td>{{ reunion.date | date }}</td>
+          <td>{{ reunion.duree }}</td>
+          <td>{{ reunion.type }}</td>
+          <td>{{ reunion.createdAt | date }}</td>
+          <td>
+              <div>
+                <button (click)="Details(reunion)" data-toggle="modal" data-target="#detailReunionModal" class="btn btn-light"><i class="fa fa-eye"></i></button>&nbsp;
+                <a [routerLink]="[ '/reunion/edit', reunion._id ]" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
+              </div>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+
+  <div class="modal fade" id="detailReunionModal" tabindex="-1" role="dialog" aria-labelledby="detailReunionModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Details Reunion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fa fa-info-circle"></i>
+                  Details
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <dl>
+                  <dt>Sujet :</dt>
+                  <dd>{{ detailReunion.sujet }}</dd>
+                  <dt>Type</dt>
+                  <dd>{{ detailReunion.type }}</dd>
+                  <dd>Lieu : {{ detailReunion.lieu }}</dd>
+                  <dt>Date du Reunion</dt>
+                  <dd>{{ detailReunion.date | date }}</dd>
+                </dl>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h2 class="card-title">Listes des Membres invités</h2>
+                        </div>
+                    </div>
+                  
+                </div>
+                
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped dataTable dtr-inline">
+                    <thead>
+                    <tr>  
+                      <th>CIN</th>
+                      <th>Nom et Prenom</th>
+                      <th>Adresse</th>
+                      <th>Portable</th>
+                      <th>Specialite</th>
+                      <th>Diplome</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="membre{{ participation._id }}" *ngFor="let participation of participations ;">
+
+                      <td>{{ participation.membre!.CIN }}</td>
+                      <td>{{ participation.membre!.nom }} {{ participation.membre!.prenom }}</td>
+                      <td>{{ participation.membre!.adresse }}</td>
+                      <td>{{ participation.membre!.portable }}</td>
+                      <td>{{ participation.membre!.specialite }}</td>
+                      <td>{{ participation.membre!.diplome }}</td>
+
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button  type="button" class="btn btn-primary">Sauvegarder</button>
+          </div>
+        </div>
+      </div>
+  </div>
