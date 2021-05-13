@@ -1,4 +1,7 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Membre } from '../models/Membre';
+import { MembreService } from '../services/membre.service';
 
 @Component({
   selector: 'app-membre',
@@ -6,10 +9,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./membre.component.css']
 })
 export class MembreComponent implements OnInit {
-
-  constructor() { }
-
+  membres: Membre[];
+  constructor(protected membreService: MembreService) { 
+    this.membres = [];
+  }
+  
   ngOnInit(): void {
+
+    this.membreService.getMembres().subscribe((res: HttpResponse<Membre[]>) => {
+      this.membres = res.body || [];
+      //console.log(res.body)
+    });
   }
 
 }

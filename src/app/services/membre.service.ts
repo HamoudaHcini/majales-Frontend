@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
+import { BackendResponse } from '../models/BackendResponse';
 import { Membre } from '../models/Membre';
 
 import { createRequestOption } from '../utils/request-util';
@@ -23,5 +24,23 @@ export class MembreService {
     const options = createRequestOption(req);
     return this.http
       .get<Membre[]>(this.resourceUrl, { observe: 'response' })
-    }
+  }
+
+  create(membre: Membre): Observable<HttpResponse<BackendResponse>> {
+    return this.http
+      .post<BackendResponse>(this.resourceUrl+"add", membre, { observe: 'response' });
+  } 
+
+  update(membre: Membre): Observable<HttpResponse<BackendResponse>> {
+    return this.http
+      .post<BackendResponse>(this.resourceUrl+"update", membre, { observe: 'response' });
+  } 
+
+
+  getmembreById(req?: any): Observable<EntityResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .post<Membre>(this.resourceUrl+"getById", req ,{ observe: 'response' })
+  }
+  
 }
