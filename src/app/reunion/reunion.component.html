@@ -1,3 +1,12 @@
+<app-header>
+
+</app-header>
+
+
+<div class="wrapper">
+
+  <div class="content-wrapper">
+
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -8,7 +17,6 @@
                 <a routerLink="/reunion/add" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Ajouter une reunion</a>
             </div>
         </div>
-      
     </div>
     
     <!-- /.card-header -->
@@ -17,28 +25,37 @@
         <thead>
         <tr>
           <th>Sujet</th>
-          <th>Lieu</th>
+          <th>Lieu du Reunion</th>
           <th>Date</th>
           <th>Duree</th>
           <th>Type</th>
           <th>Date de creation</th>  
-          <th>Actions</th>  
+          <th style="width: 25%;">Actions</th>  
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let reunion of reunions ;">
           <td>{{ reunion.sujet }}</td>
-          <td>{{ reunion.lieu }}</td>
+          <td>{{ reunion.municipalite!.Nom }}</td>
           <td>{{ reunion.date | date }}</td>
           <td>{{ reunion.duree }}</td>
           <td>{{ reunion.type }}</td>
           <td>{{ reunion.createdAt | date }}</td>
           <td>
               <div>
-                <button (click)="Details(reunion)" data-toggle="modal" data-target="#detailReunionModal" class="btn btn-light"><i class="fa fa-eye"></i></button>&nbsp;
-                <a [routerLink]="[ '/reunion/edit', reunion._id ]" class="btn btn-primary"><i class="fa fa-edit"></i></a>&nbsp;
-              </div>
+                <button (click)="Details(reunion)" data-toggle="modal" data-target="#detailReunionModal" class="btn btn-primary btn-sm"><i class="fas fa-folder"></i>&nbsp;Consulter</button>&nbsp;
+                <a [routerLink]="[ '/reunion/edit', reunion._id ]" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp;Modifier</a>&nbsp;
+                <div *ngIf="reunion.sujet!.includes('prepa'); then thenBlock else elseBlock"></div>
 
+                <ng-template #thenBlock>
+                  <button (click)="deleteReunionPreparatoire(reunion._id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>&nbsp;Supprimer</button>
+                </ng-template>
+
+                <ng-template #elseBlock>
+                  <button (click)="deleteReunion(reunion._id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>&nbsp;Supprimer</button>
+                </ng-template>
+                
+              </div>
           </td>
         </tr>
         </tbody>
@@ -46,7 +63,7 @@
     </div>
     <!-- /.card-body -->
   </div>
-  <!-- /.card -->
+
 
   <div class="modal fade" id="detailReunionModal" tabindex="-1" role="dialog" aria-labelledby="detailReunionModal" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
@@ -74,7 +91,7 @@
                   <dd>{{ detailReunion.sujet }}</dd>
                   <dt>Type</dt>
                   <dd>{{ detailReunion.type }}</dd>
-                  <dd>Lieu : {{ detailReunion.lieu }}</dd>
+                  <dd>Lieu : {{ detailReunion.municipalite!.Nom }}</dd>
                   <dt>Date du Reunion</dt>
                   <dd>{{ detailReunion.date | date }}</dd>
                 </dl>
@@ -99,7 +116,7 @@
                     <tr>  
                       <th>CIN</th>
                       <th>Nom et Prenom</th>
-                      <th>Adresse</th>
+                      <th>Adresse mail</th>
                       <th>Portable</th>
                       <th>Specialite</th>
                       <th>Diplome</th>
@@ -110,7 +127,7 @@
 
                       <td>{{ participation.membre!.CIN }}</td>
                       <td>{{ participation.membre!.nom }} {{ participation.membre!.prenom }}</td>
-                      <td>{{ participation.membre!.adresse }}</td>
+                      <td>{{ participation.membre!.adresse  }}</td>
                       <td>{{ participation.membre!.portable }}</td>
                       <td>{{ participation.membre!.specialite }}</td>
                       <td>{{ participation.membre!.diplome }}</td>
@@ -129,9 +146,25 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button  type="button" class="btn btn-primary">Sauvegarder</button>
+            <button (click)="downloadPDF(detailReunion)" type="button" class="btn btn-primary"> <i class="fa fa-download"></i>&nbsp; Telecharger</button>
           </div>
         </div>
       </div>
   </div>
+
+  </div>
+</div>
+
+
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.1.0
+    </div>
+  </footer>

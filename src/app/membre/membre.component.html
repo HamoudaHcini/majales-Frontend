@@ -1,126 +1,150 @@
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Listes des Membres</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Membres</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
+<app-header>
 
+</app-header>
 
+<div class="wrapper">
+    <div class="content-wrapper">
 
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-lg-6">
+                        <h2 class="card-title">Listes des Membres</h2>
+                    </div>
+                    <div style="text-align: right;" class="col-lg-6">
+                        <a routerLink="/membres/add" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Ajouter un membre</a>
+                    </div>        
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
 
-  <section class="content">
+        <section class="content">
 
-    <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body p-0">
-        <table class="table table-striped projects">
-            <thead>
-                <tr>
-                    <th style="width: 20%">
-                        Nom et Prenom
-                    </th>
-                    <th style="width: 30%">
-                        CIN
-                    </th>
-                    <th>
-                        Telephone
-                    </th>
-                    <th style="width: 8%" class="text-center">
-                        Municipalité
-                    </th>
-                    <th style="width: 8%" class="text-center">
-                        Etat
-                    </th>
-                    <th style="width: 20%">
-                        
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let membre of membres ;">
-                    <td>
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <div *ngIf="membre.sexe=='Homme'; else elseBlock">
-                                    <img alt="Avatar" class="table-avatar" src="assets/img/avatar.png">
-                                </div>
-                                <ng-template #elseBlock>
-                                    <img alt="Avatar" class="table-avatar" src="assets/img/avatar2.png">
-                                </ng-template>
+            <!-- Default box -->
+            <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input (keyup)="searchMembre()" id="searchBar" type="text" class="form-control" placeholder="Rechercher un membre" />        
+                    </div>
+                    <div class="col-lg-3">
+                        <select (change)="sortMembres()" id="municipalite" class="form-control">
+                            <option value="all">Toutes les municipalites</option>
+                            <option value="{{ municipalite._id }}" *ngFor="let municipalite of municipalites ;">{{ municipalite.Nom }}</option>
+                        </select>
+                    </div>
+                    <div style="text-align: end;" class="col-lg-3">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                            <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body p-0">
+
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">
+                                Nom et Prenom
+                            </th>
+                            <th style="width: 30%">
+                                CIN
+                            </th>
+                            <th>
+                                Telephone
+                            </th>
+                            <th style="width: 8%" class="text-center">
+                                Municipalité
+                            </th>
+                            <th style="width: 8%" class="text-center">
+                                Etat
+                            </th>
+                            <th style="width: 20%">
                                 
-                            </div>
-                            <div class="col-lg-10">
-                                <a>
-                                    {{membre.nom}} {{membre.prenom}}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let membre of filteredMembres ;">
+                            <td>
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <div *ngIf="membre.sexe=='Homme'; else elseBlock">
+                                            <img alt="Avatar" class="table-avatar" src="assets/img/avatar.png">
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <img alt="Avatar" class="table-avatar" src="assets/img/avatar2.png">
+                                        </ng-template>
+                                        
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <a>
+                                            {{membre.nom}} {{membre.prenom}}
+                                        </a>
+                                        <br>
+                                        <small>
+                                            {{membre.createdAt}}
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ul class="list-inline">
+                                    {{ membre.CIN }}
+                                </ul>
+                            </td>
+                            <td class="project_progress">
+                                {{ membre.portable }}
+                            </td>
+                            <td class="project_progress">
+                                {{ membre.municipalite!.Nom }}
+                            </td>
+
+                            <td class="project-state">
+
+                                <div *ngIf="membre.description_conseil!=''; else elseEtat">
+                                    <span class="badge badge-danger">Candidat</span>
+                                </div>
+                                <ng-template #elseEtat>
+                                </ng-template>
+                            </td>
+                            
+
+
+
+                            <td class="project-actions text-right">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-folder">
+                                    </i>
+                                    Consulter
+                                </button>&nbsp;
+                                <a [routerLink]="[ '/membres/edit', membre._id ]" class="btn btn-info btn-sm" href="#">
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Modifier
                                 </a>
-                                <br>
-                                <small>
-                                    {{membre.createdAt}}
-                                </small>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            {{ membre.CIN }}
-                        </ul>
-                    </td>
-                    <td class="project_progress">
-                        {{ membre.portable }}
-                    </td>
-                    <td class="project_progress">
-                        {{ membre.municipalite!.Nom }}
-                    </td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
 
-                    <td class="project-state">
+        </section>
 
-                        <div *ngIf="membre.description_conseil!=''; else elseEtat">
-                            <span class="badge badge-danger">Candidat</span>
-                        </div>
-                        <ng-template #elseEtat>
-                        </ng-template>
-                    </td>
-                    
-
-
-
-                    <td class="project-actions text-right">
-                        <button class="btn btn-primary btn-sm">
-                            <i class="fas fa-folder">
-                            </i>
-                            Consulter
-                        </button>&nbsp;
-                        <a [routerLink]="[ '/membres/edit', membre._id ]" class="btn btn-info btn-sm" href="#">
-                            <i class="fas fa-pencil-alt">
-                            </i>
-                            Modifier
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-      </div>
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
+</div>
 
-  </section>
+
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>

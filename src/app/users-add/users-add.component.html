@@ -1,0 +1,166 @@
+<app-header>
+
+</app-header>
+
+<div class="wrapper">
+    <div class="content-wrapper">
+
+        <section class="content-header">
+            <div class="container-fluid">
+              <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>Ajouter un administrateur</h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Add User</li>
+                  </ol>
+                </div>
+              </div>
+            </div><!-- /.container-fluid -->
+          </section>
+  
+          <section class="content">
+            <form name="createForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createForm">
+            <input hidden type="text" id="_id" name="_id" formControlName="_id" />   
+            <div style="justify-content: center;" class="row">
+              <div class="col-md-6">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Informations personnelles</h3>
+  
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inputName">Nom de l'administrateur</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="nom" placeholder="Nom">
+                              </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inputName">Prenom de l'administrateur</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="prenom" placeholder="Prenom">
+                              </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inputName">Pseudonyme</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="username" placeholder="Pseduo">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="inputName">Numéro de portable</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="telephone" placeholder="Numero">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <label for="inputName">Adresse mail</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="email" placeholder="Email">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inputName">Mot de passe</label>
+                                <input type="password" id="inputName" class="form-control" formControlName="password" placeholder="Mot de passe">
+                              </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="inputName">Confirmer votre mot de passe</label>
+                                <input type="password" id="confirm" class="form-control" placeholder="Mot de passe">
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="inputName">Adresse</label>
+                                <textarea id="adresse" class="form-control" formControlName="adresse" placeholder="Adresse">
+                                    
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <div class="form-group">
+                                <label for="inputName">Carte d'identité</label>
+                                <input type="text" id="inputName" class="form-control" formControlName="CIN" placeholder="CIN">
+                              </div>
+                        </div>
+  
+  
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="roleInput">Role</label>
+                                <select (change)="displayOptions()" id="roleInput" class="form-control custom-select" formControlName="role">
+                                  <option value="SUPER_ADMIN">administrateur ministere</option>
+                                  <option value="ADMIN_GOV">administrateur gouvernorat</option>
+                                  <option value="ADMIN_MUNI">administrateur municipalite</option>
+                                </select>
+                              </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div style="display: none;" id="municipaliteForm" class="form-group">
+                                <label for="inputName">Municipalite</label>
+                                <select id="choiceMunicipalite" class="form-control custom-select">
+                                    <option  *ngFor="let municipalite of municipalites;" value="{{ municipalite._id }}">{{ municipalite.Nom }}</option>
+                                </select>
+                              </div>
+
+                              <div style="display: none;" id="gouvernoratForm" class="form-group">
+                                <label for="inputName">Gouvernorat</label>
+                                <select id="choiceGouvernorat" class="form-control custom-select">
+                                    <option  *ngFor="let gouvernorat of gouvernorats;" value="{{ gouvernorat._id }}">{{ gouvernorat.Nom }}</option>
+                                </select>
+                              </div>
+                        </div>
+                    </div>
+  
+                    <div class="row">
+                        <div class="col-12">
+                          <input type="submit" value="Ajouter" class="btn btn-success float-right">
+                        </div>
+                      </div>
+  
+  
+  
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+  
+  
+            </div>
+  
+            </form>
+  
+          </section>
+
+
+
+    </div>
+</div>
+
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>

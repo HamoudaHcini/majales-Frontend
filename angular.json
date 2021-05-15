@@ -42,7 +42,9 @@
               "node_modules/admin-lte/plugins/summernote/summernote-bs4.min.css",
               "node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css",
               "node_modules/admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css",
-              "node_modules/admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css"
+              "node_modules/admin-lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css",
+              "node_modules/@fullcalendar/common/main.css",
+              "node_modules/@fullcalendar/daygrid/main.css"
             ],
             "scripts": [
               "node_modules/admin-lte/plugins/jquery/jquery.min.js",
@@ -74,8 +76,8 @@
               "node_modules/admin-lte/plugins/datatables-buttons/js/buttons.html5.min.js",
               "node_modules/admin-lte/plugins/datatables-buttons/js/buttons.print.min.js",
               "node_modules/admin-lte/plugins/datatables-buttons/js/buttons.colVis.min.js",
+              "node_modules/admin-lte/plugins/bs-custom-file-input/bs-custom-file-input.min.js",
 
-              "node_modules/admin-lte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"
             ]
           },
           "configurations": {

@@ -1,260 +1,272 @@
-<section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Ajouter un membre</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Add membre</li>
-          </ol>
-        </div>
-      </div>
-    </div><!-- /.container-fluid -->
-  </section>
+<app-header>
 
+</app-header>
 
-  <section class="content">
-    <form name="createForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createForm">
-    <input hidden type="text" id="id" name="id" formControlName="id" />   
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Informations personnelles</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Nom du membre</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="nom" placeholder="Nom">
-                      </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Prenom du membre</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="prenom" placeholder="Prenom">
-                      </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Nom de pere du membre</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="nom_pere" placeholder="Nom du pere">
-                      </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="inputName">Carte d'identité</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="CIN" placeholder="CIN">
-                      </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="inputName">Municipalité</label>
-                        <select id="inputStatus" class="form-control custom-select" formControlName="municipalite">
-                            <option *ngFor="let municipalite of municipalites;" value="{{ municipalite._id }}">{{ municipalite.Nom }}</option>
-                          </select>
-                      </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="inputName">Etat civil</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="etat_civil" placeholder="Etat civil">
-                      </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <label for="inputName">Sexe</label>
-                        <select id="inputStatus" class="form-control custom-select" formControlName="sexe">
-                          <option value="Homme">Homme</option>
-                          <option value="Femme">Femme</option>
-                        </select>
-                      </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Adresse</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="adresse" placeholder="Adresse">
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Numéro de portable</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="portable" placeholder="Numero">
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
-                        <label for="inputName">Fix</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="fix" placeholder="Fix">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-              <label for="inputDescription">Problemes physiques</label>
-              <textarea style="height: 144px;" id="inputDescription" class="form-control" formControlName="problemes_physique" rows="4"></textarea>
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="form-group">
-                        <label for="inputName">Niveau scolaire</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="niveau_academique" placeholder="Niveau">
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="form-group">
-                        <label for="inputName">Specialite</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="specialite" placeholder="Specialite">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="inputName">Diplome</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="diplome" placeholder="Diplome">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="inputName">Année d'obtention</label>
-                        <input type="text" id="inputName" class="form-control" formControlName="annee_obtention" placeholder="Année">
-                    </div>
-                </div>
-            </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-
-      <div class="col-md-6">
-        <div class="card card-secondary">
-          <div class="card-header">
-            <h3 class="card-title">Etat administratif</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="Secteur">Secteur</label>
-                        <input type="text" id="Secteur" formControlName="secteur"  class="form-control" placeholder="Secteur">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="Grade">Grade</label>
-                        <input type="text" id="Grade" formControlName="grade"  class="form-control" placeholder="Grade">
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="Poste">Poste</label>
-                        <input type="text" id="Poste" formControlName="poste"  class="form-control" placeholder="Poste">
-                    </div>           
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="Numero">Numero CNSS</label>
-                        <input type="text" id="Numero" formControlName="num_cnss"  class="form-control" placeholder="Numero">
-                    </div>           
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label for="Numero">En service</label>
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="customRadio1"  name="customRadio" checked="">
-                          <label for="customRadio1" class="custom-control-label">Oui</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                          <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
-                          <label for="customRadio2" class="custom-control-label">Non</label>
-                        </div>
-                      </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-check">
-                        <input (click)="toggleCard()" id="checkAppartenance" class="form-check-input" type="checkbox">
-                        <label for="checkAppartenance" style="font-weight: bold;" class="form-check-label">Appartenance politique</label>
-                      </div>
-                </div>
-            </div>
-
-          </div>
-          <!-- /.card-body -->
-        </div>
-
-
-        <div style="display: none;" id="appartenanceCard" class="card card-secondary">
-            <div class="card-header">
-              <h3 class="card-title">Appartenance politique</h3>
-  
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+<div class="wrapper">
+    <div class="content-wrapper">
+      <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Ajouter un membre</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">Add membre</li>
+                </ol>
               </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <label for="inputEstimatedBudget">Nom de la partie politique</label>
-                        <input type="text" id="nom_partie" class="form-control" formControlName="nom_partie"  placeholder="Nom">
+          </div><!-- /.container-fluid -->
+        </section>
+
+
+        <section class="content">
+          <form name="createForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="createForm">
+          <input hidden type="text" id="id" name="id" formControlName="id" />   
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Informations personnelles</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Nom du membre</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="nom" placeholder="Nom">
+                            </div>
                       </div>
-                </div>
-                <div style="margin-top: 12px;" class="row">
-                    <div class="col-lg-12">
-                        <label for="inputDescription_conseil">Description conseil municipal</label>
-                        <textarea id="inputDescription_conseil" formControlName="description_conseil" class="form-control" rows="4"></textarea>
-                    </div>
-                </div>
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Prenom du membre</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="prenom" placeholder="Prenom">
+                            </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Nom de pere du membre</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="nom_pere" placeholder="Nom du pere">
+                            </div>
+                      </div>
+                  </div>
 
+                  <div class="row">
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputName">Carte d'identité</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="CIN" placeholder="CIN">
+                            </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputName">Municipalité</label>
+                              <select id="inputStatus" class="form-control custom-select" formControlName="municipalite">
+                                  <option *ngFor="let municipalite of municipalites;" value="{{ municipalite._id }}">{{ municipalite.Nom }}</option>
+                                </select>
+                            </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputName">Etat civil</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="etat_civil" placeholder="Etat civil">
+                            </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputName">Sexe</label>
+                              <select id="inputStatus" class="form-control custom-select" formControlName="sexe">
+                                <option value="Homme">Homme</option>
+                                <option value="Femme">Femme</option>
+                              </select>
+                            </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Adresse</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="adresse" placeholder="Adresse">
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Numéro de portable</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="portable" placeholder="Numero">
+                          </div>
+                      </div>
+                      <div class="col-lg-4">
+                          <div class="form-group">
+                              <label for="inputName">Fix</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="fix" placeholder="Fix">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputDescription">Problemes physiques</label>
+                    <textarea style="height: 144px;" id="inputDescription" class="form-control" formControlName="problemes_physique" rows="4"></textarea>
+                  </div>
+
+
+
+                  <div class="row">
+                      <div class="col-lg-5">
+                          <div class="form-group">
+                              <label for="inputName">Niveau scolaire</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="niveau_academique" placeholder="Niveau">
+                          </div>
+                      </div>
+                      <div class="col-lg-7">
+                          <div class="form-group">
+                              <label for="inputName">Specialite</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="specialite" placeholder="Specialite">
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="inputName">Diplome</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="diplome" placeholder="Diplome">
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="inputName">Année d'obtention</label>
+                              <input type="text" id="inputName" class="form-control" formControlName="annee_obtention" placeholder="Année">
+                          </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
             </div>
-            <!-- /.card-body -->
-          </div>
-        <!-- /.card -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <input type="submit" value="Enregistrer" class="btn btn-success float-right">
-      </div>
-    </div>
-    </form>
 
-  </section>
+            <div class="col-md-6">
+              <div class="card card-secondary">
+                <div class="card-header">
+                  <h3 class="card-title">Etat administratif</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="Secteur">Secteur</label>
+                              <input type="text" id="Secteur" formControlName="secteur"  class="form-control" placeholder="Secteur">
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="Grade">Grade</label>
+                              <input type="text" id="Grade" formControlName="grade"  class="form-control" placeholder="Grade">
+                          </div>
+                      </div>
+
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="Poste">Poste</label>
+                              <input type="text" id="Poste" formControlName="poste"  class="form-control" placeholder="Poste">
+                          </div>           
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <label for="Numero">Numero CNSS</label>
+                              <input type="text" id="Numero" formControlName="num_cnss"  class="form-control" placeholder="Numero">
+                          </div>           
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="form-group">
+                              <label for="Numero">En service</label>
+                              <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="customRadio1"  name="customRadio" checked="">
+                                <label for="customRadio1" class="custom-control-label">Oui</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                                <label for="customRadio2" class="custom-control-label">Non</label>
+                              </div>
+                            </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-lg-12">
+                          <div class="form-check">
+                              <input (click)="toggleCard()" id="checkAppartenance" class="form-check-input" type="checkbox">
+                              <label for="checkAppartenance" style="font-weight: bold;" class="form-check-label">Appartenance politique</label>
+                            </div>
+                      </div>
+                  </div>
+
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+
+              <div style="display: none;" id="appartenanceCard" class="card card-secondary">
+                  <div class="card-header">
+                    <h3 class="card-title">Appartenance politique</h3>
+        
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <label for="inputEstimatedBudget">Nom de la partie politique</label>
+                              <input type="text" id="nom_partie" class="form-control" formControlName="nom_partie"  placeholder="Nom">
+                            </div>
+                      </div>
+                      <div style="margin-top: 12px;" class="row">
+                          <div class="col-lg-12">
+                              <label for="inputDescription_conseil">Description conseil municipal</label>
+                              <textarea id="inputDescription_conseil" formControlName="description_conseil" class="form-control" rows="4"></textarea>
+                          </div>
+                      </div>
+
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+              <!-- /.card -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <input type="submit" value="modifier un membre" class="btn btn-success float-right">
+            </div>
+          </div>
+          </form>
+
+        </section>
+  </div>
+</div>
+
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>

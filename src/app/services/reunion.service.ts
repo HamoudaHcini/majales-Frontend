@@ -43,4 +43,14 @@ export class ReunionService {
       .post<BackendResponse>(this.resourceUrl+"edit", reunion, { observe: 'response' });
   } 
 
+  delete(reunionId?: any): Observable<HttpResponse<BackendResponse>> {
+    return this.http
+      .post<BackendResponse>(this.resourceUrl+"destroy", reunionId, { observe: 'response' });
+  } 
+
+  deletePreparatoire(reunionId?: any): Observable<HttpResponse<BackendResponse>> {
+    return this.http
+      .post<BackendResponse>(this.resourceUrl+"destroyPrep", reunionId, { observe: 'response' });
+  } 
+
 }

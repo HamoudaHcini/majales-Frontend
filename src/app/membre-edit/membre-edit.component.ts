@@ -167,7 +167,7 @@ export class MembreEditComponent implements OnInit {
       (res) => {
         if(res.status==200){
           console.log(res.body!.message);
-          //window.history.back();
+          window.history.back();
         }
       },
       error => console.log(error)
