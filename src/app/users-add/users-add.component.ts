@@ -124,6 +124,10 @@ export class UsersAddComponent implements OnInit {
 
   }
 
+  Annuler(): void{
+    window.history.back();
+  }
+
   displayOptions(): void{
     const choice = document.getElementById('roleInput') as HTMLSelectElement;
       if (choice.value=="ADMIN_GOV") {

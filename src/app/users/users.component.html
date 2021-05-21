@@ -44,65 +44,128 @@
                     </div>
                     <div class="card-body p-0">
         
-                        <table class="table table-striped projects">
-                            <thead>
-                                <tr>
-                                    <th style="width: 20%">
-                                        Nom et Prenom
-                                    </th>
-                                    <th style="width: 30%">
-                                        Nom d'utilisateur
-                                    </th>
-                                    <th>
-                                        Adresse mail
-                                    </th>
-                                    <th style="width: 8%" class="text-center">
-                                        Telephone
-                                    </th>
-                                    <th style="width: 8%" class="text-center">
-                                        Role
-                                    </th>
-                                    <th style="width: 20%">
-                                        Actions
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let administrateur of filteredadministrateurs ;">
-                                    <td>
-                                        {{ administrateur.prenom }} {{ administrateur.nom }}
-                                    </td>
-                                    <td>
-                                        {{ administrateur.username }}
-                                    </td>
-                                    <td>
-                                        {{ administrateur.email }}
-                                    </td>
-                                    <td>
-                                        {{ administrateur.telephone }}
-                                    </td>
-                                    <td>
-                                        {{ administrateur.role }}
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-info btn-sm" href="#">
-                                            <i class="fas fa-pencil-alt">
-                                            </i>
-                                            Modifier
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-        
-        </section>
+                        <div class="row d-flex align-items-stretch">
 
+                            <div *ngFor="let administrateur of filteredadministrateurs ;" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                                <div style="width: -webkit-fill-available;" class="card bg-light">
+                                  <div class="card-header text-muted border-bottom-0">
+                                    Administrateur
+                                  </div>
+                                  <div class="card-body pt-0">
+                                    <div class="row">
+                                      <div class="col-7">
+                                        <h2 class="lead"><b>{{ administrateur.prenom }} {{ administrateur.nom }}</b></h2>
+                                        <p class="text-muted text-sm"><b>Role: </b>  
+                                            <div *ngIf="administrateur.role!.includes('MUN')">
+                                                <p class="text-muted text-sm"><b>Role: </b>
+                                                    Administrateur municipalité
+                                                </p>
+                                            </div>
+                                            <div *ngIf="administrateur.role!.includes('GO')">
+                                                
+                                                <p class="text-muted text-sm"><b>Role: </b>
+                                                    Administrateur gouvernrat
+                                                </p>
+                                            </div>
+                                            <div *ngIf="administrateur.role!.includes('SUPER')">  
+                                                <p class="text-muted text-sm"><b>Role: </b>
+                                                    Administrateur ministere
+                                                </p>
+                                            </div>
+                                            &nbsp;                                              
+                                        
+                                        <ul class="ml-4 mb-0 fa-ul text-muted">
+                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: <br>{{ administrateur.email }}</li>
+                                          <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: + 216 {{ administrateur.telephone }}</li>
+                                        </ul>
+                                      </div>
+                                      <div class="col-5 text-center">
+                                        <img style="object-fit: cover;height: 128px;width: 128px;" src="assets/img/admin.jpg" alt="" class="img-circle img-fluid">
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer">
+
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+        </section>
     </div>
 </div>
+
+
+
+<div class="modal fade" id="detailAdminModal" tabindex="-1" role="dialog" aria-labelledby="detailAdminModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Details administrateur</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fa fa-info-circle"></i>
+                  Details
+                </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+
+                <div class="d-flex align-items-stretch">
+                    <div style="width: 60%;" class="card bg-light">
+                      <div class="card-header text-muted border-bottom-0">
+                        Administrateur
+                      </div>
+                      <div class="card-body pt-0">
+                        <div class="row">
+                          <div class="col-7">
+                            <h2 class="lead"><b>{{ detailAdministrateur.prenom+" "+detailAdministrateur.nom }}</b></h2>
+                            <p class="text-muted text-sm"><b>About: </b> Administrateur {{ detailAdministrateur.role }} </p>
+                            <ul class="ml-4 mb-0 fa-ul text-muted">
+                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{ detailAdministrateur.email }}</li>
+                              <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone : + 216 - {{ detailAdministrateur.telephone }}</li>
+                            </ul>
+                          </div>
+                          <div class="col-5 text-center">
+                            <img style="object-fit: cover;height: 100px;width: 100px;" src="assets/img/admin.jpg" alt="" class="img-circle img-fluid">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+
+
+
+
+
+          </div>
+          <div class="modal-footer">
+            
+        </div>
+        </div>
+      </div>
+  </div>
 
 <aside class="control-sidebar control-sidebar-dark">
   <!-- Control sidebar content goes here -->

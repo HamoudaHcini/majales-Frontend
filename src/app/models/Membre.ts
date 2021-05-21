@@ -7,25 +7,22 @@ export class Membre
   prenom?: string;
   nom_pere?: string;
   sexe?: string;
-  etat_civil?: string;
-  problemes_physique?: string;
-  
   CIN?: string;
-  adresse?: string;
-  portable?: string;
-  fix?: string;
 
   //parcours universitaire
   niveau_academique?: string;
   specialite?: string;
   diplome?: string;
   annee_obtention?: string;
- 
+
+  etat_civil?: string;
+  problemes_physique?: string;
+  
+  adresse?: string;
+  portable?: string;
+  fix?: string;
   municipalite?: Municipalite;
 
-  createdAt?:Date;
-  updatedAt?:Date;
-  
   isParticipated:boolean;
 
   //etat administratif
@@ -40,7 +37,8 @@ export class Membre
   nom_partie?:string;
   description_conseil?:string;
   
-
+  createdAt?:Date;
+  updatedAt?:Date;
 
 
 

@@ -11,10 +11,26 @@ import { UsersService } from '../services/users.service';
 export class UsersComponent implements OnInit {
   administrateurs: Admin[];
   filteredadministrateurs: Admin[];
-
+  detailAdministrateur:Admin;
   constructor(protected usersService: UsersService) {
     this.administrateurs=[];
     this.filteredadministrateurs=[];
+
+    this.detailAdministrateur= {
+      ...new Admin(),
+      _id: "",
+      username:"",
+      password:"",
+      nom:"",
+      prenom:"",
+      adresse:"",
+      email:"",
+      telephone:"",
+      CIN:"",
+      avatar:"",
+      role:"",
+      accessToken:"",
+    };
   }
 
   ngOnInit(): void {
@@ -37,5 +53,10 @@ export class UsersComponent implements OnInit {
       this.filteredadministrateurs = this.administrateurs.filter(this.checkUser);
     }
   }
+
+  Details(administrateur:Admin):void{
+    this.detailAdministrateur=administrateur;
+  }
+
 
 }
