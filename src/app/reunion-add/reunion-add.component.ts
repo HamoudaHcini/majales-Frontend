@@ -147,6 +147,11 @@ export class ReunionAddComponent implements OnInit {
     };
   }
 
+
+  Annuler(): void{
+    window.history.back();
+  }
+
   save(): void{
     var reunion = this.createReunionForm();
     var today = new Date();

@@ -37,4 +37,8 @@ export class UsersService {
     return this.http
       .post<Admin>(this.resourceUrl+"getById", req ,{ observe: 'response' })
   }
+  delete(AdminId?: any): Observable<HttpResponse<BackendResponse>> {
+    return this.http
+      .post<BackendResponse>(this.resourceUrl+"destroy", AdminId, { observe: 'response' });
+  }
 }

@@ -85,7 +85,9 @@ export class MembreAddComponent implements OnInit {
     };    
   }
 
-
+  Annuler(): void{
+    window.history.back();
+  }
   save(){
 
     this.membre = this.createMembreForm();
@@ -101,7 +103,7 @@ export class MembreAddComponent implements OnInit {
       error => console.log(error)
     );
 
-
+   
 
 
 

@@ -59,4 +59,29 @@ export class UsersComponent implements OnInit {
   }
 
 
+
+
+
+
+ destroy(administrateur:Admin):void{
+  for (var i = 0; i < this.administrateurs!.length; i++) {
+    if(this.administrateurs![i]._id==administrateur._id)
+    {
+        this.administrateurs!.splice(i,1);
+    }
+  }
+  this.usersService.delete({ adminId: administrateur._id }).subscribe(
+    (res) => {
+      if(res.status==200){
+        console.log(res.body!.message);
+      }
+    },
+    error => console.log(error)
+  );
+
+}
+    
+    
+  
+
 }
