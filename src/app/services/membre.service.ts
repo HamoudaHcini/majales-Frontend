@@ -26,6 +26,21 @@ export class MembreService {
       .get<Membre[]>(this.resourceUrl, { observe: 'response' })
   }
 
+  
+
+  getMembresByGouvernorat(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .post<Membre[]>(this.resourceUrl+"getMembresByGouvernorat",req, { observe: 'response' })
+  }
+
+
+  getMembresByMunicipalite(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .post<Membre[]>(this.resourceUrl+"getMembresByMunicipalite",req, { observe: 'response' })
+  }
+
   create(membre: Membre): Observable<HttpResponse<BackendResponse>> {
     return this.http
       .post<BackendResponse>(this.resourceUrl+"add", membre, { observe: 'response' });
