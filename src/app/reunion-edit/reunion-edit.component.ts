@@ -139,7 +139,9 @@ export class ReunionEditComponent implements OnInit {
       type: reunion.type,
     });
   }
-
+  Annuler(): void{
+    window.history.back();
+  }
   save(): void{
     var reunion = this.createReunionForm();
     this.reunionService.update(reunion).subscribe(

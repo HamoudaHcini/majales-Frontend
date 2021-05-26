@@ -12,7 +12,7 @@ import { MunicipaliteService } from '../services/municipalite.service';
   templateUrl: './membre.component.html',
   styleUrls: ['./membre.component.css']
 })
-export class MembreComponent implements OnInit {
+export class MembreComponent implements OnInit { 
   membres: Membre[];
   filteredMembres: Membre[];
   municipalites: Municipalite[];
@@ -58,7 +58,7 @@ export class MembreComponent implements OnInit {
     };
   }
   
-  ngOnInit(): void {
+  ngOnInit(): void { //Affichage liste membre
 
     this.membreService.getMembres().subscribe((res: HttpResponse<Membre[]>) => {
       this.membres = res.body || [];
@@ -70,7 +70,7 @@ export class MembreComponent implements OnInit {
     });
   }
 
-  checkMembre(membre:Membre) {
+  checkMembre(membre:Membre) { //Rechercher membre
     const searchInput = document.getElementById('searchBar') as HTMLInputElement;
     return (membre.CIN!.startsWith(searchInput.value) || membre.nom!.startsWith(searchInput.value) || membre.prenom!.startsWith(searchInput.value));
   }
@@ -101,11 +101,11 @@ export class MembreComponent implements OnInit {
     } 
   }
 
-  Details(membre:Membre):void{
+  Details(membre:Membre):void{ 
     this.detailMembre=membre;
   }
 
-  public downloadPDF(membre:Membre){
+  public downloadPDF(membre:Membre){ //télécharger fiche membre
     var data = document.getElementById('detailMembreModal') as HTMLElement
     html2canvas(data).then(canvas => {
 

@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
       prenom:""
     };
   }
-  ngOnInit(): void {
+  ngOnInit(): void { // if user already connected
     const trouv = localStorage.getItem("connected");
     if (trouv==null) {
       this.router.navigateByUrl('/login');
