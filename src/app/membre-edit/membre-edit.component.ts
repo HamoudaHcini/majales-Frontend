@@ -138,7 +138,9 @@ export class MembreEditComponent implements OnInit {
       description_conseil: this.createForm.get(['description_conseil'])!.value
     };    
   }
-
+  Annuler(): void{
+    window.history.back();
+  }
 
   save(){
 
