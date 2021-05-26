@@ -57,7 +57,7 @@ export class MembreComponent implements OnInit {
       description_conseil:"",
     };
   }
-  
+  //liste des membre et municipalité
   ngOnInit(): void {
 
     this.membreService.getMembres().subscribe((res: HttpResponse<Membre[]>) => {
@@ -69,12 +69,12 @@ export class MembreComponent implements OnInit {
       this.municipalites = res.body || [];
     });
   }
-
+//recherche membre par 
   checkMembre(membre:Membre) {
     const searchInput = document.getElementById('searchBar') as HTMLInputElement;
     return (membre.CIN!.startsWith(searchInput.value) || membre.nom!.startsWith(searchInput.value) || membre.prenom!.startsWith(searchInput.value));
   }
-
+//recherche membre
   searchMembre(){
     const searchInput = document.getElementById('searchBar') as HTMLInputElement;
     
@@ -84,7 +84,7 @@ export class MembreComponent implements OnInit {
       this.filteredMembres = this.membres.filter(this.checkMembre);
     }
   }
-
+//recherche membre par municipalité
   sortMembreByMunicipalite(membre:Membre){
     const municipalite = document.getElementById('municipalite') as HTMLSelectElement;
     return membre.municipalite!._id! === municipalite.value
@@ -100,11 +100,11 @@ export class MembreComponent implements OnInit {
       this.filteredMembres = this.membres.filter(this.sortMembreByMunicipalite);
     } 
   }
-
+//detail membre
   Details(membre:Membre):void{
     this.detailMembre=membre;
   }
-
+//telecharger fiche pdf
   public downloadPDF(membre:Membre){
     var data = document.getElementById('detailMembreModal') as HTMLElement
     html2canvas(data).then(canvas => {

@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
       prenom:""
     };
   }
+  //test de cnxion
   ngOnInit(): void {
     const trouv = localStorage.getItem("connected");
     if (trouv==null) {

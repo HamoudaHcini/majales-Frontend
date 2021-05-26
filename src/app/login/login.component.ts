@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     }else if (password.length==0) {
       alert("please fill password")
     } else {
-      this.loginService.login({ email: username ,pwd: password }).subscribe((res: HttpResponse<Admin>) => {
+      this.loginService.login({ email: username ,pwd: password }).subscribe((res: HttpResponse<Admin>) => { //test
         if (res.status==201) {
           alert("password incorrect")
         }else if (res.status==202) {
