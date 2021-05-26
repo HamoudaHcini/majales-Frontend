@@ -53,32 +53,46 @@ export class ReunionAddComponent implements OnInit {
         const idGouv = this.connected!.role.split(":"); // les municipalites qui appartient au gouvernerat de l'admin
         this.municipaliteService.getMunicipalitesByGouvernorat({ gouvernoratId: idGouv[1] }).subscribe((res: HttpResponse<Municipalite[]>) => {
           this.municipalites = res.body || [];
-        });         
+        }); 
+        
+        this.membreService.getMembresByGouvernorat({ gouvernoratId: idGouv[1] }).subscribe((res: HttpResponse<Membre[]>) => {
+          this.membres = res.body || [];
+          this.filteredMembres = res.body || [];
+        });
+
       }else if(this.connected!.role=="SUPER_ADMIN"){ // toutes les municipalites
         this.municipaliteService.getMunicipalites().subscribe((res: HttpResponse<Municipalite[]>) => {
           this.municipalites = res.body || [];
         }); 
-      }else if(this.connected!.role?.includes("MUNI")){//affecter la municipalite de l'admin
 
+        this.membreService.getMembres().subscribe((res: HttpResponse<Membre[]>) => {
+          this.membres = res.body || [];
+          this.filteredMembres = res.body || [];
+        });
+
+      }else if(this.connected!.role?.includes("MUNI")){//affecter la municipalite de l'admin
+        const idMun = this.connected!.role!.split(":");
         this.municipaliteService.getMunicipalites().subscribe((res: HttpResponse<Municipalite[]>) => {
           this.municipalites = res.body || [];
-
-          const idMun = this.connected!.role!.split(":");
+          
           var municipaliteSelect = document.getElementById('municipalite') as HTMLSelectElement;
           this.createForm.patchValue({
             municipalite:idMun[1],
           });
           municipaliteSelect.disabled=true;
-        });         
+        });     
+        
+        
+        this.membreService.getMembresByMunicipalite({ municipaliteId: idMun[1] }).subscribe((res: HttpResponse<Membre[]>) => {
+          this.membres = res.body || [];
+          this.filteredMembres = res.body || [];
+        });
 
       }
 
     }
 
-    this.membreService.getMembres().subscribe((res: HttpResponse<Membre[]>) => {
-      this.membres = res.body || [];
-      this.filteredMembres = res.body || [];
-    });
+
 
   }
 
